@@ -69,15 +69,15 @@ const GameExtender = {
             for (let ship of this.ships)
             {
                 ship.highscore= Math.max(ship.highscore||0,ship.score);
-                if (ship.death === void 0) ship.death=0;
-                if (ship.frag === void 0) ship.frag=0;
+                if (Object.is(ship.death)) ship.death=0;
+                if (Object.is(ship.frag)) ship.frag=0;
             }
         else
             switch(event.name||"")
             {
                 case "ship_destroyed":
-                    if (event.killer != null) event.killer.frag=(event.killer.frag||0)+1;
-                    if (event.ship != null) event.ship.death=(event.ship.death||0)+1;
+                    if (!Object.is(event.killer)) event.killer.frag=(event.killer.frag||0)+1;
+                    if (!Object.is(event.ship)) event.ship.death=(event.ship.death||0)+1;
             }
     }
 }

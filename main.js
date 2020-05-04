@@ -4,6 +4,9 @@ const GameExtender = {
     print: function(item) {
         this.modding.terminal.echo(item);
     },
+    error: function(item) {
+        this.modding.terminal.error.echo(item);
+    },
     kick: function(identifier) {
         let ship = this.locateShip(identifier);
         return ship.gameover({
@@ -57,6 +60,17 @@ const GameExtender = {
                 interval[0]();
             }
         })
+    },
+    updateShips: function(isEvent) {
+        if (!isEvent)
+            for (let ship of this.ships) ship.highscore= Math.max(ship.highscore||0,ship.score);
+        else
+            switch(event.name||"")
+            {
+                case "ship_destroyed":
+                    if (event.killer != null) event.killer.frag=(event.killer.frag||0)+1;
+                    if (event.ship != null) event.ship.death=(event.ship.death||0)+1;
+            }
     }
 }
 var _initialized = false;
@@ -69,6 +83,11 @@ this.tick = function(game) {
         Object.assign(game, GameExtender);
         _initialized = true;
     }
+    game.updateShips();
     game.checkForTimers();
     game.checkForIntervals();
+}
+this.event = function (event,game) {
+    game.updateShips(event);
+    // Place your event handler code here
 }

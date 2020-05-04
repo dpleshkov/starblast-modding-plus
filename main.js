@@ -4,8 +4,14 @@ const GameExtender = {
     print: function(item) {
         this.modding.terminal.echo(item);
     },
+    echo: function (item) {
+      this.print(item);
+    },
+    log: function (item) {
+      this.print(item);
+    },
     error: function(item) {
-        this.modding.terminal.error.echo(item);
+        this.modding.terminal.error(item);
     },
     kick: function(identifier) {
         let ship = this.locateShip(identifier);
@@ -59,32 +65,30 @@ const GameExtender = {
     },
     checkForIntervals: function() {
         this.intervals.forEach(function(interval) {
-            if (game.step % interval[1] == 0) {
+            if (game.step % interval[1] === 0) {
                 interval[0]();
             }
         })
     },
-    updateShips: function(isEvent) {
-        if (!isEvent)
-            for (let ship of this.ships)
-            {
+    updateShips: function(event) {
+        if (!event)
+            this.ships.forEach(function(ship) {
                 ship.highscore= Math.max(ship.highscore||0,ship.score);
                 if (Object.is(ship.death)) ship.death=0;
                 if (Object.is(ship.frag)) ship.frag=0;
-            }
-        else
+            })
+        else 
             switch(event.name||"")
             {
                 case "ship_destroyed":
-                    if (!Object.is(event.killer)) event.killer.frag=(event.killer.frag||0)+1;
-                    if (!Object.is(event.ship)) event.ship.death=(event.ship.death||0)+1;
+                    if (!Object.is(event.killer,null)) event.killer.frag++;
+                    if (!Object.is(event.ship,null)) event.ship.death++;
+                    break;
             }
     }
 }
-var _initialized = false;
 
-this.options = {
-};
+var _initialized = false;
 
 this.tick = function(game) {
     if (!_initialized) {
@@ -94,7 +98,9 @@ this.tick = function(game) {
     game.updateShips();
     game.checkForTimers();
     game.checkForIntervals();
+    // Place your tick function here
 }
+
 this.event = function (event,game) {
     game.updateShips(event);
     // Place your event handler code here

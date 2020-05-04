@@ -90,6 +90,10 @@ const GameExtender = {
 
 var _initialized = false;
 
+this.options = {
+    // see documentation for options reference
+}
+
 this.tick = function(game) {
     if (!_initialized) {
         Object.assign(game, GameExtender);

@@ -16,10 +16,19 @@ Will display the game over screen for the target player, kicking them out of the
 
 Same thing but it kills the target player, letting them still respawn.
 
+### game.instructorBroadcast(message, _instructor, _delay)
+
+Broadcasts a message to all players in the game using the instructor dialog. `_instructor` is optional, must be a string of either: `Lucina`, `Klaus`, `Maria`, `Kan`, `Zoltar`. Defaults to `Lucina`. Delay is an optional number that specifies after how many ticks the instructor dialog will close. Defaults to `120` (2 seconds). 
+
+**Warning: breaks when you broadcast 2 messages at the same time**
+
 ## Programming Tools
 
-### game.print(item)
+### game.print(item), game.echo(item), game.log(item)
 Wrapper for `game.modding.terminal.echo`. Modding equivalent of the `console.log` function.
+
+### game.error(message)
+Same thing as `game.print` except it's colored differently.
 
 ### game.setInterval(function, delay)
 

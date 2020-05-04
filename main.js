@@ -84,6 +84,19 @@ const GameExtender = {
                     if (!Object.is(event.ship, null)) event.ship.death++;
                     break;
             }
+    },
+    instructorBroadcast: function(message, _instructor, _delay) {
+        _instructor = _instructor || "Lucina";
+        _delay = _delay || 120;
+        this.ships.forEach(function(ship) {
+            ship.instructorSays(message, _instructor);
+        });
+        var gamePointer = this; // javascript be like
+        this.setTimeout(function() {
+            gamePointer.ships.forEach(function(ship) {
+                ship.hideInstructor();
+            })
+        }, _delay);
     }
 }
 

@@ -11,7 +11,10 @@ const GameExtender = {
         let ship = this.locateShip(identifier);
         return ship.gameover({
             "Status": "Kicked by operator",
-            "Score": ship.score
+            "Score": ship.score,
+            "High score": ship.highscore,
+            "Frags": ship.frag,
+            "Deaths": ship.death
         });
     },
     kill: function(identifier) {
@@ -63,7 +66,12 @@ const GameExtender = {
     },
     updateShips: function(isEvent) {
         if (!isEvent)
-            for (let ship of this.ships) ship.highscore= Math.max(ship.highscore||0,ship.score);
+            for (let ship of this.ships)
+            {
+                ship.highscore= Math.max(ship.highscore||0,ship.score);
+                if (ship.death === void 0) ship.death=0;
+                if (ship.frag === void 0) ship.frag=0;
+            }
         else
             switch(event.name||"")
             {

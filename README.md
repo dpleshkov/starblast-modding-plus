@@ -10,7 +10,7 @@ For more details, see the [documentation](/docs.md).
 
 ## How to contribute
 
-Fork this repo, add your changes, then make a pull request.
+[Fork this repo](https://github.com/dpleshkov/starblast-modding-plus/fork), add your changes, then make a [pull request](https://github.com/dpleshkov/starblast-modding-plus/pulls).
 
 
 ## Still confused?

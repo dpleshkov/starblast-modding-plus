@@ -1,3 +1,4 @@
+/*Initial setup. Do not modify codes between the comments blocks! */
 const GameExtender = {
     broadcastInterval:0,
     timers: new Set(),
@@ -46,11 +47,11 @@ const GameExtender = {
     },
     setTimeout: function (func, ticks) {
         let currentTick = this.step;
-        this.timers.add([func, Number(currentTick + ticks)||0, this]);
+        this.timers.add([func, currentTick + ticks, this]);
     },
     setInterval: function (func, ticks) {
         let currentTick = this.step;
-        return this.intervals.push([func, Number(ticks)||0]) - 1;
+        return this.intervals.push([func, ticks]) - 1;
     },
     clearInterval: function (index) {
         this.intervals.splice(index, 1);
@@ -111,13 +112,38 @@ const GameExtender = {
 
 const ShipExtender = {
   kill: function () {
-    return this.set({
+    this.set({
       kill: true
     });
+    return this;
   }  
 }
 
+for (let prop of ["invulnerable","angle"])
+  eval(`ShipExtender.${prop} = function(data) {
+    this.set({
+      ${prop}: data
+    });
+    return this;
+  }`);
+  
+const AlienExtender = {
+  kill: function () {
+    return this.set({
+      kill: true
+    });
+  }
+}
+
+for (let prop of ["shield","regen","damage","laser_speed","rate"])
+  eval(`AlienExtender.${prop} = function(data) {
+    this.set({
+      ${prop}: data
+    });
+    return this;
+  }`);
 var _initialized = false;
+/* End of initial setup */
 
 this.options = {
     // see documentation for options reference
@@ -127,6 +153,7 @@ this.tick = function (game) {
     if (!_initialized) {
         Object.assign(game, GameExtender);
         Object.assign(I1l00.prototype, ShipExtender);
+        Object.assign(Alien.prototype, AlienExtender);
         _initialized = true;
     }
     game.updateShips();

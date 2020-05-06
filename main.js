@@ -31,7 +31,7 @@ const GameExtender = {
     },
     locateShip: function (identifier) {
         if (typeof identifier == "number") {
-            return this.ships[identifier];
+            return this.findShip(identifier);
         }
         let searchQuery = identifier.toLowerCase();
         for (let shipIndex in this.ships) {
@@ -41,7 +41,7 @@ const GameExtender = {
                 return ship;
             }
         }
-        return -1;
+        return null;
     },
     setTimeout: function (func, ticks) {
         let currentTick = this.step;

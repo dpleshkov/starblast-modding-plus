@@ -132,6 +132,9 @@ const AlienExtender = {
     return this.set({
       kill: true
     });
+  },
+  laserSpeed: function (data) {
+    return this.laser_speed(data);
   }
 }
 

@@ -46,11 +46,11 @@ const GameExtender = {
     },
     setTimeout: function (func, ticks) {
         let currentTick = this.step;
-        this.timers.add([func, currentTick + ticks, this]);
+        this.timers.add([func, Number(currentTick + ticks)||0, this]);
     },
     setInterval: function (func, ticks) {
         let currentTick = this.step;
-        return this.intervals.push([func, ticks]) - 1;
+        return this.intervals.push([func, Number(ticks)||0]) - 1;
     },
     clearInterval: function (index) {
         this.intervals.splice(index, 1);
@@ -88,7 +88,7 @@ const GameExtender = {
     },
     instructorBroadcast: function(message, _instructor, _delay) {
         _instructor = _instructor || "Lucina";
-        _delay = _delay || 120;
+        _delay = Number(_delay) || 120;
         this.setTimeout(function() {
           this.ships.forEach(function(ship) {
             ship.instructorSays(message, _instructor);

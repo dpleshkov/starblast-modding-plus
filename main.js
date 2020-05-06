@@ -100,6 +100,14 @@ const GameExtender = {
     }
 }
 
+const ShipExtender = {
+  kill: function () {
+    return this.set({
+      kill: true
+    });
+  }  
+}
+
 var _initialized = false;
 
 this.options = {
@@ -109,6 +117,7 @@ this.options = {
 this.tick = function (game) {
     if (!_initialized) {
         Object.assign(game, GameExtender);
+        Object.assign(I1l00.prototype, ShipExtender);
         _initialized = true;
     }
     game.updateShips();

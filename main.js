@@ -1,4 +1,5 @@
 const GameExtender = {
+    broadcastInterval:0,
     timers: new Set(),
     intervals: [],
     print: function (item) {
@@ -14,8 +15,8 @@ const GameExtender = {
         this.modding.terminal.error(item);
     },
     kick: function (identifier) {
-        let ship = this.locateShip(identifier);
-        return ship.gameover({
+        let ship = this.findShip(identifier);
+        return ship && ship.gameover({
             "Status": "Kicked by operator",
             "Score": ship.score,
             "High score": ship.highscore,
@@ -24,14 +25,14 @@ const GameExtender = {
         });
     },
     kill: function (identifier) {
-        let ship = this.locateShip(identifier);
-        return ship.set({
+        let ship = this.findShip(identifier);
+        return ship && ship.set({
             kill: true
         });
     },
     locateShip: function (identifier) {
         if (typeof identifier == "number") {
-            return this.ships[identifier];
+            return this.findShip(identifier);
         }
         let searchQuery = identifier.toLowerCase();
         for (let shipIndex in this.ships) {
@@ -41,15 +42,15 @@ const GameExtender = {
                 return ship;
             }
         }
-        return -1;
+        return null;
     },
     setTimeout: function (func, ticks) {
         let currentTick = this.step;
-        this.timers.add([func, currentTick + ticks, this]);
+        this.timers.add([func, Number(currentTick + ticks)||0, this]);
     },
     setInterval: function (func, ticks) {
         let currentTick = this.step;
-        return this.intervals.push([func, ticks]) - 1;
+        return this.intervals.push([func, Number(ticks)||0]) - 1;
     },
     clearInterval: function (index) {
         this.intervals.splice(index, 1);
@@ -87,17 +88,33 @@ const GameExtender = {
     },
     instructorBroadcast: function(message, _instructor, _delay) {
         _instructor = _instructor || "Lucina";
-        _delay = _delay || 120;
-        this.ships.forEach(function(ship) {
-            ship.instructorSays(message, _instructor);
-        });
-        var gamePointer = this; // javascript be like
+        _delay = Number(_delay) || 120;
         this.setTimeout(function() {
-            gamePointer.ships.forEach(function(ship) {
+          this.ships.forEach(function(ship) {
+            ship.instructorSays(message, _instructor);
+          })
+        }.bind(this), this.broadcastInterval);
+        this.broadcastInterval = this.broadcastInterval + _delay;
+        this.setTimeout(function() {
+            (this.broadcastInterval == _delay) && this.ships.forEach(function(ship) {
                 ship.hideInstructor();
             })
-        }, _delay);
+            this.broadcastInterval = this.broadcastInterval - _delay;
+        }.bind(this), this.broadcastInterval);
+    },
+    emptyWeapons: function () {
+      this.ships.forEach(function(ship) {
+        ship.emptyWeapons();
+      });
     }
+}
+
+const ShipExtender = {
+  kill: function () {
+    return this.set({
+      kill: true
+    });
+  }  
 }
 
 var _initialized = false;
@@ -109,6 +126,7 @@ this.options = {
 this.tick = function (game) {
     if (!_initialized) {
         Object.assign(game, GameExtender);
+        Object.assign(I1l00.prototype, ShipExtender);
         _initialized = true;
     }
     game.updateShips();

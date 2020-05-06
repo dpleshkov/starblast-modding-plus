@@ -14,8 +14,8 @@ const GameExtender = {
         this.modding.terminal.error(item);
     },
     kick: function (identifier) {
-        let ship = this.locateShip(identifier);
-        return ship.gameover({
+        let ship = this.findShip(identifier);
+        return ship && ship.gameover({
             "Status": "Kicked by operator",
             "Score": ship.score,
             "High score": ship.highscore,
@@ -24,8 +24,8 @@ const GameExtender = {
         });
     },
     kill: function (identifier) {
-        let ship = this.locateShip(identifier);
-        return ship.set({
+        let ship = this.findShip(identifier);
+        return ship && ship.set({
             kill: true
         });
     },

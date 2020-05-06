@@ -101,6 +101,11 @@ const GameExtender = {
             })
             this.broadcastInterval = this.broadcastInterval - _delay;
         }.bind(this), this.broadcastInterval);
+    },
+    emptyWeapons: function () {
+      this.ships.forEach(function(ship) {
+        ship.emptyWeapons();
+      });
     }
 }
 

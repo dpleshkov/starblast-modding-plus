@@ -1,4 +1,5 @@
 const GameExtender = {
+    broadcastInterval:0,
     timers: new Set(),
     intervals: [],
     print: function (item) {
@@ -88,15 +89,18 @@ const GameExtender = {
     instructorBroadcast: function(message, _instructor, _delay) {
         _instructor = _instructor || "Lucina";
         _delay = _delay || 120;
-        this.ships.forEach(function(ship) {
-            ship.instructorSays(message, _instructor);
-        });
-        var gamePointer = this; // javascript be like
         this.setTimeout(function() {
-            gamePointer.ships.forEach(function(ship) {
+          this.ships.forEach(function(ship) {
+            ship.instructorSays(message, _instructor);
+          })
+        }.bind(this), this.broadcastInterval);
+        this.broadcastInterval = this.broadcastInterval + _delay;
+        this.setTimeout(function() {
+            (this.broadcastInterval == _delay) && this.ships.forEach(function(ship) {
                 ship.hideInstructor();
             })
-        }, _delay);
+            this.broadcastInterval = this.broadcastInterval - _delay;
+        }.bind(this), this.broadcastInterval);
     }
 }
 

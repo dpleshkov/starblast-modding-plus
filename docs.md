@@ -47,7 +47,7 @@ Empty all weapon slots from all players in the game.
 
 **Note:** Both alien and ship extended options can be "chained" (execute other functions right after the previous functions)
 
-This excluded `alien.kill()` because once killed, they cannot respawn
+This excluded `alien.kill()` because once killed, aliens cannot respawn anymore.
 
 For example:
 ```js

@@ -45,6 +45,15 @@ Empty all weapon slots from all players in the game.
 |alien.rate(rate)|Firing rate|
 |alien.kill()|Destroy the alien|
 
+**Note:** Both alien and ship extended options can be "chained" (execute other functions right after the previous functions)
+
+This excluded `alien.kill()` because once killed, they cannot respawn
+
+For example:
+```js
+game.ships[0].angle(15).invulnerable(120).kill()
+game.aliens[0].rate(10).laser_speed(10).damage(10).shield(100).regen(20)
+```
 ## Programming Tools
 
 ### game.print(item), game.echo(item), game.log(item)

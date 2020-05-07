@@ -21,7 +21,12 @@ Same thing but it kills the target player, letting them still respawn.
 Broadcasts a message to all players in the game using the instructor dialog. `_instructor` is optional, must be a string of either: `Lucina`, `Klaus`, `Maria`, `Kan`, `Zoltar`. Defaults to `Lucina`. Delay is an optional number that specifies after how many ticks the instructor dialog will close. Defaults to `120` (2 seconds). 
 
 **Warning: breaks when you broadcast 2 messages at the same time**
-## Ship extended options
+
+### game.emptyWeapons()
+
+Empty all weapon slots from all players in the game.
+
+## Extended ship options
 
 |Option|Description|
 |-|-|

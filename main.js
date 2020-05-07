@@ -145,7 +145,7 @@ for (let prop of ["shield","regen","damage","laser_speed","rate"])
     });
     return this;
   }`);
-var _initialized = false;
+
 /* End of initial setup */
 
 this.options = {
@@ -153,11 +153,10 @@ this.options = {
 }
 
 this.tick = function (game) {
-    if (!_initialized) {
+    if (!game.step) {
         Object.assign(game, GameExtender);
         Object.assign(I1l00.prototype, ShipExtender);
         Object.assign(Alien.prototype, AlienExtender);
-        _initialized = true;
     }
     game.updateShips();
     game.checkForTimers();

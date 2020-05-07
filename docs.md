@@ -2,7 +2,7 @@
 
 ## How does it work?
 
-A JavaScript object is pre-written with all the functions we wish to add. As soon as a game instance is launched, it is joined with the `game` object using JavaScript's `Object.assign`.
+A JavaScript object is pre-written with all the functions we wish to add. As soon as a game instance is launched, it is joined with the `game`, every ship and alien objects using JavaScript's `Object.assign`.
 
 ## Administrative tools
 
@@ -22,6 +22,38 @@ Broadcasts a message to all players in the game using the instructor dialog. `_i
 
 **Warning: breaks when you broadcast 2 messages at the same time**
 
+### game.emptyWeapons()
+
+Empty all weapon slots from all players in the game.
+
+## Extended ship options
+
+|Option|Description|
+|-|-|
+|ship.invulnerable(tick)|set `tick` ticks of invulnerability to `ship`|
+|ship.angle(angle)|Changes the direction the ship is facing|
+|ship.kill()|Kill the ship, letting they still respawn|
+
+## Alien extended options
+
+|Option|Alien set value|
+|-|-|
+|alien.shield(shield)|Shield|
+|alien.regen(regen)|Shield regen|
+|alien.damage(damage)|Laser damage|
+|alien.laser_speed(speed) or alien.laserSpeed(speed)|Laser speed|
+|alien.rate(rate)|Firing rate|
+|alien.kill()|Destroy the alien|
+
+**Note:** Both alien and ship extended options can be "chained" (execute other functions right after the previous functions)
+
+This excluded `alien.kill()` because once killed, aliens cannot respawn anymore.
+
+For example:
+```js
+game.ships[0].angle(15).invulnerable(120).kill()
+game.aliens[0].rate(10).laser_speed(10).damage(10).shield(100).regen(20)
+```
 ## Programming Tools
 
 ### game.print(item), game.echo(item), game.log(item)

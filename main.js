@@ -63,14 +63,14 @@ const GameExtender = {
                 timer[0]();
                 game.timers.delete(timer);
             }
-        })
+        });
     },
     checkForIntervals: function () {
         this.intervals.forEach(function (interval) {
             if (game.step % interval[1] === 0) {
                 interval[0]();
             }
-        })
+        });
     },
     updateShips: function (event) {
         if (!event)
@@ -78,7 +78,7 @@ const GameExtender = {
                 ship.highscore = Math.max(ship.highscore || 0, ship.score);
                 if (Object.is(ship.death)) ship.death = 0;
                 if (Object.is(ship.frag)) ship.frag = 0;
-            })
+            });
         else
             switch (event.name || "") {
                 case "ship_destroyed":
@@ -93,13 +93,13 @@ const GameExtender = {
         this.setTimeout(function() {
           this.ships.forEach(function(ship) {
             ship.instructorSays(message, _instructor);
-          })
+          });
         }.bind(this), this.broadcastInterval);
         this.broadcastInterval = this.broadcastInterval + _delay;
         this.setTimeout(function() {
             (this.broadcastInterval == _delay) && this.ships.forEach(function(ship) {
                 ship.hideInstructor();
-            })
+            });
             this.broadcastInterval = this.broadcastInterval - _delay;
         }.bind(this), this.broadcastInterval);
     },
@@ -108,7 +108,7 @@ const GameExtender = {
         ship.emptyWeapons();
       });
     }
-}
+};
 
 const ShipExtender = {
   kill: function () {
@@ -117,7 +117,7 @@ const ShipExtender = {
     });
     return this;
   }  
-}
+};
 
 for (let prop of ["invulnerable","angle"])
   eval(`ShipExtender.${prop} = function(data) {
@@ -136,7 +136,7 @@ const AlienExtender = {
   laserSpeed: function (data) {
     return this.laser_speed(data);
   }
-}
+};
 
 for (let prop of ["shield","regen","damage","laser_speed","rate"])
   eval(`AlienExtender.${prop} = function(data) {
@@ -145,24 +145,23 @@ for (let prop of ["shield","regen","damage","laser_speed","rate"])
     });
     return this;
   }`);
+  
+Object.assign(game, GameExtender);
+Object.assign(I1l00.prototype, ShipExtender);
+Object.assign(Alien.prototype, AlienExtender);
 
 /* End of initial setup */
 
 this.options = {
     // see documentation for options reference
-}
+};
 
 this.tick = function (game) {
-    if (!game.step) {
-        Object.assign(game, GameExtender);
-        Object.assign(I1l00.prototype, ShipExtender);
-        Object.assign(Alien.prototype, AlienExtender);
-    }
     game.updateShips();
     game.checkForTimers();
     game.checkForIntervals();
-    // Place your tick function here
-}
+    // do mod stuff here ; see documentation
+};
 
 this.event = function (event, game) {
     game.updateShips(event);

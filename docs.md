@@ -75,6 +75,7 @@ Tick CPU time: average 0 ms ; max 4 ms
 Data sent: 0 bytes per second
 > showtick false
 Automatic tick logging is disabled
+> █
 ```
 
 

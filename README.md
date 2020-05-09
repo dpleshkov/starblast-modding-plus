@@ -54,7 +54,9 @@ or
 
 ![Error 2](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusError2.PNG)
 
-Please DM `Dank Dmitron#4593` on Discord, or ping me on the official Discord.
+Restart your computer, then try to run the mod again.
+
+If the errors still occurs, DM `Dank Dmitron#4593` on Discord, or ping me on the official Discord.
 
 While i am fixing the problem, consider using [method 2](#method-2-template-mod) instead.
 
@@ -71,11 +73,24 @@ Use 'test' to open game frame for testing
 
 Then Congratulations! You've done!
 
+#### Pros
+* Automatic update when new features are available.
+* Short, easy to implement.
+#### Cons
+* Can sometimes caused an error due to CORS policy.
+
 If you're don't want to use this method, then there is another choice for you:
 
 ### Method 2: Template Mod
 
+#### Initialize
 Open up the [`main.js`](/main.js) file, use the code in there as a starting template for your next mod.
+#### Pros
+* No CORS problems
+#### Cons
+* Cannot be automatically update when new features are available
+* Too long to implement
+* Can caused problems if not implemented correctly
 
 ## Documentation
 

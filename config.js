@@ -2,7 +2,7 @@ let success=1;
 try
 {
     let fail=0;
-    $.ajax("https://raw.githubusercontent.com/Bhpsngum/img-src/master/main.js")
+    $.ajax("https://raw.githubusercontent.com/dpleshkov/starblast-modding-plus/master/main.js")
     .done(function (response) {
         eval("function init(){"+response+"}");
         

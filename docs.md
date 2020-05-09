@@ -32,7 +32,7 @@ Empty all weapon slots from all players in the game.
 
 |Option|Type|Description|
 |-|-|-|
-|ship.invulnerable(tick)|Function|set `tick` ticks of invulnerability to `ship`|
+|ship.invulnerable(tick)|Function|Set `tick` ticks of invulnerability to `ship`|
 |ship.angle(angle)|Function|Changes the direction the ship is facing|
 |ship.kill()|Function|Kill the ship, letting they still respawn|
 |ship.frag|Value|Ship's current frags (doesn't include alien kills)|

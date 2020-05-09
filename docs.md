@@ -2,6 +2,8 @@
 
 ## How does it work?
 
+![Modding Plus Tree](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusTree.png)
+
 A JavaScript object is pre-written with all the functions we wish to add. As soon as a game instance is launched, it is joined with the `game`, every ship and alien objects using JavaScript's `Object.assign`.
 
 ## Administrative tools
@@ -54,6 +56,15 @@ For example:
 game.ships[0].angle(15).invulnerable(120).kill()
 game.aliens[0].rate(10).laser_speed(10).damage(10).shield(100).regen(20)
 ```
+
+## Debugging Tools
+
+### showtick (terminal command)
+
+To enable/disable auto tick-logging in the console
+
+Syntax: `> showtick <true/false> (omit to view the current stats)`
+
 ## Programming Tools
 
 ### game.print(item), game.echo(item), game.log(item)
@@ -73,4 +84,5 @@ Clears the selected interval.
 ### game.setTimeout(function, delay)
 
 Executes function `function` after `delay` ticks.
+
 

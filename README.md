@@ -2,6 +2,27 @@
 
 Modding+ is a WIP extension to the default modding engine for Starblast. 
 
+<details>
+  <summary markdown="span">Table of contents</summary>
+     
+  **[How to use](#how-to-use)**
+  
+  <details>
+    <summary markdown="span">Contents</summary>
+ 
+   * **[Method 1: Background initialization](#method-1-background-initialization)**
+    
+   * **[Method 2: Template Mod](#method-2-template-mod)**
+   
+  </details>
+  
+  **[Documentation](#documentation)**
+  
+  **[How to contribute](#how-to-contribute)**
+  
+  **[Still confused?](#still-confused)**
+</details>
+
 ## How to use
 
 There 2 methods available:
@@ -32,7 +53,7 @@ if you get one of these errors:
 
 ![Error 2](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusError2.PNG)
 
-DM `Dank Dmitron#4593` on Discord, or ping me on the official Discord.
+Please DM `Dank Dmitron#4593` on Discord, or ping me on the official Discord.
 
 While i am fixing the problem, consider using [method 2](#method-2-template-mod) instead.
 

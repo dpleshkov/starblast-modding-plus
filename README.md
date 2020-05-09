@@ -62,7 +62,7 @@ Else if the terminal shows the result like the this:
 ```
 > start
 Code initialization took 3ms
-Successfully initialized the Modding+ extensions into the Modding engine
+Successfully initialized the Modding+ extensions into the Modding engine!
 Mod started
 https://starblast.io#1234@12.34.56.78:3000
 Use 'test' to open game frame for testing

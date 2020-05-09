@@ -34,7 +34,7 @@ try
                     suc=1;
                     break;
                 default:
-                    game.modding.echo("Please specify true/false to proceed");
+                    game.modding.terminal.echo("Please specify true/false to proceed");
             }
             (suc) && game.modding.terminal.echo(`Automatic tick logging is ${(localStorage.showtick == "true")?"enabled":"disabled"}`);
         }

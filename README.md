@@ -38,7 +38,7 @@ $.ajax("https://raw.githubusercontent.com/dpleshkov/starblast-modding-plus/maste
   eval(data);
 })
 .fail(function (e) {
-  console.log("An error occured while loading the Modding+ extensions!");
+  game.modding.terminal.error("An error occured while loading the Modding+ extensions!");
 });
 ```
 ![Test Run](https://raw.githubusercontent.com/Bhpsngum/img-src/master/TestRunModdingPlus.PNG)

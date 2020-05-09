@@ -49,17 +49,23 @@ Type `start` in the modding console to run your mod.
 if you get one of these errors:
 
 ![Error 1](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusError1.PNG)
-
-
+or
 ![Error 2](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusError2.PNG)
 
 Please DM `Dank Dmitron#4593` on Discord, or ping me on the official Discord.
 
 While i am fixing the problem, consider using [method 2](#method-2-template-mod) instead.
 
-If the terminal shows the result like the image below:
-
-![Success](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusSuccess.PNG)
+Else if the terminal shows the result like the this:
+```
+> start
+Code initialization took 3ms
+Successfully initialized the Modding+ extensions into the Modding engine
+Mod started
+https://starblast.io#1234@12.34.56.78:3000
+Use 'test' to open game frame for testing
+> █
+```
 
 Then Congratulations! You've done!
 

@@ -30,11 +30,14 @@ Empty all weapon slots from all players in the game.
 
 ## Extended ship options
 
-|Option|Description|
-|-|-|
-|ship.invulnerable(tick)|set `tick` ticks of invulnerability to `ship`|
-|ship.angle(angle)|Changes the direction the ship is facing|
-|ship.kill()|Kill the ship, letting they still respawn|
+|Option|Type|Description|
+|-|-|-|
+|ship.invulnerable(tick)|Function|set `tick` ticks of invulnerability to `ship`|
+|ship.angle(angle)|Function|Changes the direction the ship is facing|
+|ship.kill()|Function|Kill the ship, letting they still respawn|
+|ship.frag|Value|Ship's current frags (doesn't include alien kills)|
+|ship.death|Value|Ship's current deaths|
+|ship.highscore|Value|Ship's high score|
 
 ## Alien extended options
 

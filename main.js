@@ -76,8 +76,6 @@ const GameExtender = {
         if (!event)
             this.ships.forEach(function (ship) {
                 ship.highscore = Math.max(ship.highscore || 0, ship.score);
-                if (Object.is(ship.death)) ship.death = 0;
-                if (Object.is(ship.frag)) ship.frag = 0;
             });
         else
             switch (event.name || "") {
@@ -116,7 +114,10 @@ const ShipExtender = {
       kill: true
     });
     return this;
-  }  
+  },
+  frag: 0,
+  death: 0,
+  highscore: 0
 };
 
 for (let prop of ["invulnerable","angle"])

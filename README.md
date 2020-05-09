@@ -33,13 +33,24 @@ if you get one of these errors:
 ![Error 2](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusError2.PNG)
 
 DM `Dank Dmitron#4593` on Discord, or ping me on the official Discord.
-While i am fixing the problem, consider using [method 2](#method-2)
 
+While i am fixing the problem, consider using [method 2](#method-2) instead.
 
+If the terminal shows the result like the image below:
+
+![Success](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusSuccess.PNG)
+
+Then Congratulations! You've done!
+
+If you're don't want to use this method, then there is another choice for you:
+
+### Method 2: Template Mod
 
 Open up the [`main.js`](/main.js) file, use the code in there as a starting template for your next mod.
 
-For more details, see the [documentation](/docs.md).
+## Documentation
+
+For more instructions and information, see the [documentation](/docs.md).
 
 ## How to contribute
 

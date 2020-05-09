@@ -34,7 +34,7 @@ if you get one of these errors:
 
 DM `Dank Dmitron#4593` on Discord, or ping me on the official Discord.
 
-While i am fixing the problem, consider using [method 2](#method-2) instead.
+While i am fixing the problem, consider using [method 2](#method-2-template-mod) instead.
 
 If the terminal shows the result like the image below:
 

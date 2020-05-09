@@ -4,7 +4,7 @@
 
 ![Modding Plus Tree](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusTree.png)
 
-A JavaScript object is pre-written with all the functions we wish to add. As soon as a game instance is launched, it is joined with the `game`, every ship and alien objects using JavaScript's `Object.assign`.
+A JavaScript object is pre-written with all the functions we wish to add. As soon as a game instance is launched, it is joined with the `game`, every ship, asteroid and alien objects using JavaScript's `Object.assign`.
 
 ## Administrative tools
 
@@ -39,6 +39,11 @@ Empty all weapon slots from all players in the game.
 |ship.death|Value|Ship's current deaths|
 |ship.highscore|Value|Ship's high score|
 
+## Asteroid extended options
+
+|Option|Description|
+|-|-|
+|asteroid.kill()|Destroy the asteroid|
 ## Alien extended options
 
 |Option|Alien set value|
@@ -50,9 +55,9 @@ Empty all weapon slots from all players in the game.
 |alien.rate(rate)|Firing rate|
 |alien.kill()|Destroy the alien|
 
-**Note:** Both alien and ship extended options can be "chained" (execute other functions right after the previous functions)
+**Note:** Both alien, asteroid and ship extended options can be "chained" (execute other functions right after the previous functions)
 
-This excluded `alien.kill()` because once killed, aliens cannot respawn anymore.
+This excluded `alien.kill()` and `asteroid.kill()` because once killed, aliens or asteroids cannot respawn anymore.
 
 For example:
 ```js

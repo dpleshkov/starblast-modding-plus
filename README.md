@@ -58,7 +58,7 @@ Restart your computer, then try to run the mod again.
 
 If the errors still occurs, DM `Dank Dmitron#4593` on Discord, or ping me on the official Discord.
 
-While i am fixing the problem, consider using [method 2](#method-2-template-mod) instead.
+While the problems have been fixing, consider using [method 2](#method-2-template-mod) instead.
 
 Else if the terminal shows the result like the this:
 ```
@@ -75,7 +75,7 @@ Then Congratulations! You've done!
 
 #### Pros
 * Automatic update when new features are available.
-* Short, easy to implement.
+* Short and easy to implement.
 #### Cons
 * Can sometimes caused an error due to CORS policy.
 
@@ -88,9 +88,9 @@ Open up the [`main.js`](/main.js) file, use the code in there as a starting temp
 #### Pros
 * No CORS problems
 #### Cons
-* Cannot be automatically update when new features are available
+* Cannot be automatically updated when new features are available
 * Too long to implement
-* Can caused problems if not implemented correctly
+* Can cause problems if not implemented correctly
 
 ## Documentation
 

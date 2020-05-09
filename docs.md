@@ -65,6 +65,19 @@ To enable/disable auto tick-logging in the console
 
 Syntax: `> showtick <true/false> (omit to view the current stats)`
 
+For example:
+```
+> showtick
+Automatic tick logging is disabled
+> showtick true
+Automatic tick logging is enabled
+Tick CPU time: average 0 ms ; max 4 ms
+Data sent: 0 bytes per second
+> showtick false
+Automatic tick logging is disabled
+```
+
+
 ## Programming Tools
 
 ### game.print(item), game.echo(item), game.log(item)

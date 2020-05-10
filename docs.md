@@ -2,7 +2,9 @@
 
 ## How does it work?
 
-A JavaScript object is pre-written with all the functions we wish to add. As soon as a game instance is launched, it is joined with the `game`, every ship and alien objects using JavaScript's `Object.assign`.
+![Modding Plus Tree](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusTree.png)
+
+A JavaScript object is pre-written with all the functions we wish to add. As soon as a game instance is launched, it is joined with the `game`, every ship, asteroid and alien objects using JavaScript's `Object.assign`.
 
 ## Administrative tools
 
@@ -28,12 +30,20 @@ Empty all weapon slots from all players in the game.
 
 ## Extended ship options
 
+|Option|Type|Description|
+|-|-|-|
+|ship.invulnerable(tick)|Function|Set `tick` ticks of invulnerability to `ship`|
+|ship.angle(angle)|Function|Changes the direction the ship is facing|
+|ship.kill()|Function|Kill the ship, letting they still respawn|
+|ship.frag|Value|Ship's current frags (doesn't include alien kills)|
+|ship.death|Value|Ship's current deaths|
+|ship.highscore|Value|Ship's high score|
+
+## Asteroid extended options
+
 |Option|Description|
 |-|-|
-|ship.invulnerable(tick)|set `tick` ticks of invulnerability to `ship`|
-|ship.angle(angle)|Changes the direction the ship is facing|
-|ship.kill()|Kill the ship, letting they still respawn|
-
+|asteroid.kill()|Destroy the asteroid|
 ## Alien extended options
 
 |Option|Alien set value|
@@ -45,15 +55,38 @@ Empty all weapon slots from all players in the game.
 |alien.rate(rate)|Firing rate|
 |alien.kill()|Destroy the alien|
 
-**Note:** Both alien and ship extended options can be "chained" (execute other functions right after the previous functions)
+**Note:** Both alien, asteroid and ship extended options can be "chained" (execute other functions right after the previous functions)
 
-This excluded `alien.kill()` because once killed, aliens cannot respawn anymore.
+This excluded `alien.kill()` and `asteroid.kill()` because once killed, aliens or asteroids cannot respawn anymore.
 
 For example:
 ```js
 game.ships[0].angle(15).invulnerable(120).kill()
 game.aliens[0].rate(10).laser_speed(10).damage(10).shield(100).regen(20)
 ```
+
+## Debugging Tools
+
+### showtick (terminal command)
+
+To enable/disable auto tick-logging in the console
+
+Syntax: `> showtick <true/false> (omit to view the current stats)`
+
+For example:
+```
+> showtick
+Automatic tick logging is disabled
+> showtick true
+Automatic tick logging is enabled
+Tick CPU time: average 0 ms ; max 4 ms
+Data sent: 0 bytes per second
+> showtick false
+Automatic tick logging is disabled
+> █
+```
+
+
 ## Programming Tools
 
 ### game.print(item), game.echo(item), game.log(item)
@@ -73,4 +106,5 @@ Clears the selected interval.
 ### game.setTimeout(function, delay)
 
 Executes function `function` after `delay` ticks.
+
 

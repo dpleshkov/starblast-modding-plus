@@ -60,7 +60,7 @@ const GameExtender = {
         this.timers.forEach(function (timer) {
             let game = timer[2];
             if (game.step >= timer[1]) {
-                timer[0]();
+                (typeof timer[0] == "function") && timer[0]();
                 game.timers.delete(timer);
             }
         });
@@ -68,7 +68,7 @@ const GameExtender = {
     checkForIntervals: function () {
         this.intervals.forEach(function (interval) {
             if (game.step % interval[1] === 0) {
-                interval[0]();
+                (typeof interval[0] == "function") && interval[0]();
             }
         });
     },
@@ -76,8 +76,6 @@ const GameExtender = {
         if (!event)
             this.ships.forEach(function (ship) {
                 ship.highscore = Math.max(ship.highscore || 0, ship.score);
-                if (Object.is(ship.death)) ship.death = 0;
-                if (Object.is(ship.frag)) ship.frag = 0;
             });
         else
             switch (event.name || "") {
@@ -116,7 +114,10 @@ const ShipExtender = {
       kill: true
     });
     return this;
-  }  
+  },
+  frag: 0,
+  death: 0,
+  highscore: 0
 };
 
 for (let prop of ["invulnerable","angle"])
@@ -133,10 +134,9 @@ const AlienExtender = {
       kill: true
     });
   },
-  laserSpeed: function (data) {
-    return this.laser_speed(data);
-  }
 };
+
+Object.assign(Asteroid.prototype, AlienExtender);
 
 for (let prop of ["shield","regen","damage","laser_speed","rate"])
   eval(`AlienExtender.${prop} = function(data) {
@@ -145,6 +145,10 @@ for (let prop of ["shield","regen","damage","laser_speed","rate"])
     });
     return this;
   }`);
+
+AlienExtender.laserSpeed = function (data) {
+    return this.laser_speed(data);
+}
   
 Object.assign(game, GameExtender);
 Object.assign(I1l00.prototype, ShipExtender);

@@ -54,13 +54,13 @@ or
 
 ![Error 2](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusError2.PNG)
 
-Restart your computer, then try to run the mod again.
+Try to run the mod again.
 
-If the errors still occurs, DM `Dank Dmitron#4593` on Discord, or ping me on the official Discord.
+If the errors still occur, DM `Dank Dmitron#4593` on Discord, or ping on the official Discord.
 
-While the problems have been fixing, consider using [method 2](#method-2-template-mod) instead.
+If you're still getting problems, consider using [method 2](#method-2-template-mod) instead.
 
-Else if the terminal shows the result like the this:
+If the terminal shows the result like the this:
 ```
 > start
 Code initialization took 3ms
@@ -71,15 +71,15 @@ Use 'test' to open game frame for testing
 > █
 ```
 
-Then Congratulations! You've done!
+Then it works.
 
 #### Pros
-* Automatic update when new features are available.
-* Short and easy to implement.
+* Automatically updates when new features are available.
+* Short and concise.
 #### Cons
-* Can sometimes caused an error due to CORS policy.
+* Sometimes fails to work due to CORS policies.
 
-If you're don't want to use this method, then there is another choice for you:
+If this method fails to work or you want to import the mod code manually, then do this:
 
 ### Method 2: Template Mod
 

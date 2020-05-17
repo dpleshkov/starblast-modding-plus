@@ -22,8 +22,6 @@ Same thing but it kills the target player, letting them still respawn.
 
 Broadcasts a message to all players in the game using the instructor dialog. `_instructor` is optional, must be a string of either: `Lucina`, `Klaus`, `Maria`, `Kan`, `Zoltar`. Defaults to `Lucina`. Delay is an optional number that specifies after how many ticks the instructor dialog will close. Defaults to `120` (2 seconds). 
 
-**Warning: breaks when you broadcast 2 messages at the same time**
-
 ### game.emptyWeapons()
 
 Empty all weapon slots from all players in the game.
@@ -33,18 +31,19 @@ Empty all weapon slots from all players in the game.
 |Option|Type|Description|
 |-|-|-|
 |ship.invulnerable(tick)|Function|Set `tick` ticks of invulnerability to `ship`|
-|ship.angle(angle)|Function|Changes the direction the ship is facing|
+|ship.angle(angle)|Function|Changes the direction the ship is facing (in degrees)|
 |ship.kill()|Function|Kill the ship, letting they still respawn|
 |ship.frag|Value|Ship's current frags (doesn't include alien kills)|
 |ship.death|Value|Ship's current deaths|
 |ship.highscore|Value|Ship's high score|
+|ship.rotation|Value|Ship's rotation angle (same as ship.r, but in degrees)|
 
-## Asteroid extended options
+## Extended asteroid options
 
 |Option|Description|
 |-|-|
 |asteroid.kill()|Destroy the asteroid|
-## Alien extended options
+## Extended alien options
 
 |Option|Alien set value|
 |-|-|
@@ -55,9 +54,9 @@ Empty all weapon slots from all players in the game.
 |alien.rate(rate)|Firing rate|
 |alien.kill()|Destroy the alien|
 
-**Note:** Both alien, asteroid and ship extended options can be "chained" (execute other functions right after the previous functions)
+**Note:** Both extended alien and ship options can be "chained" (execute other functions right after the previous functions)
 
-This excluded `alien.kill()` and `asteroid.kill()` because once killed, aliens or asteroids cannot respawn anymore.
+This excluded `alien.kill()` because once killed, aliens cannot respawn anymore.
 
 For example:
 ```js

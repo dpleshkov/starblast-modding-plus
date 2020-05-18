@@ -17,7 +17,7 @@ Modding+ is a WIP extension to the default modding engine for Starblast.
   </details>
   
   **[Documentation](#documentation)**
-  
+   
   **[How to contribute](#how-to-contribute)**
   
   **[Still confused?](#still-confused)**
@@ -46,30 +46,33 @@ $.ajax("https://raw.githubusercontent.com/dpleshkov/starblast-modding-plus/maste
 
 Type `start` in the modding console to run your mod.
 
-if you get one of these errors:
+if you get the error below:
 
-![Error 1](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusError1.PNG)
+![Error 1](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusError1.png)
 
-or
+Try these action below + running the mod again after each try (from the top to bottom):
+* Reload the Modding
+* Empty-cache and Hard-reload the Modding:
+  * **Firefox / Safari:** Hold Shift while clicking Reload, or press either Ctrl-F5 or Ctrl-R (⌘-R on a Mac)
+  * **Google Chrome:** Press Ctrl-Shift-R (⌘-Shift-R on a Mac)
+  * **Internet Explorer:** Hold Ctrl while clicking Refresh, or press Ctrl-F5
+  * **Opera:** Go to Menu → Settings (Opera → Preferences on a Mac) and then to Privacy & security → Clear browsing data → Cached images and files.
+* Relaunch your browser
+* Restart your device
 
-![Error 2](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusError2.PNG)
+If the errors still occur, [contact me](#still-confused) to report the problem.
 
-Try to run the mod again.
+Or if you get the error below:
 
-If the errors still occur, DM `Dank Dmitron#4593` on Discord, or ping on the official Discord.
+![Error 2](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusError2.png)
+
+[Contact me](#still-confused) as soon as possible as this error was caused by our resources, which will affect all users.
 
 If you're still getting problems, consider using [method 2](#method-2-template-mod) instead.
 
 If the terminal shows the result like the this:
-```
-> start
-Code initialization took 3ms
-Successfully initialized the Modding+ extensions into the Modding engine!
-Mod started
-https://starblast.io#1234@12.34.56.78:3000
-Use 'test' to open game frame for testing
-> █
-```
+
+![Success](https://raw.githubusercontent.com/Bhpsngum/img-src/master/ModdingPlusSuccess.PNG)
 
 Then it works.
 

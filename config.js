@@ -4,51 +4,52 @@ try
     let fail=0;
     $.ajax("https://raw.githubusercontent.com/dpleshkov/starblast-modding-plus/master/main.js")
     .done(function (response) {
-        eval("function init(){"+response+"}");
+        let init;
+        
+        eval("init = function (){"+response+"}");
         
         let parsed = new init();
         
-        function checkTicks(game)
+        function showtick(req, isNotify, needEdit)
         {
-            return parsed.tick && parsed.tick(game);
-        }
-
-        function checkEvents(event, game)
-        {
-            return parsed.event && parsed.event(event, game);
-        }
-        
-        game.modding.commands.showtick = function(req)
-        {
-            let cmd=req.trim().split(" ");
-            let suc=0;
-            switch((cmd[1]||"").toLowerCase())
+            let suc=0,f;
+            switch((req||"").toLowerCase())
             {
                 case "true":
                 case "false":
-                    localStorage.setItem("showtick",cmd[1].toLowerCase());
+                    f=req;
                     suc=1;
                     break;
                 case "":
-                    (["true","false"].indexOf(localStorage.showtick) == -1) && localStorage.setItem("showtick","true");
+                    if (["true","false"].indexOf(localStorage.showtick) == -1) f="true";
                     suc=1;
                     break;
                 default:
-                    game.modding.terminal.echo("Please specify true/false to proceed");
+                    if (needEdit)
+                        if (["true","false"].indexOf(localStorage.showtick) == -1) f="true";
+                    (isNotify) && game.modding.terminal.echo("Please specify true/false to proceed");
             }
-            (suc) && game.modding.terminal.echo(`Automatic tick logging is ${(localStorage.showtick == "true")?"enabled":"disabled"}`);
+            (f) && localStorage.setItem("showtick",f);
+            return suc;
+        }
+            
+        game.modding.commands.showtick = function(req)
+        {
+            let cmd=req.trim().split(" ");
+            
+            (showtick(cmd[1],1,1)) && game.modding.terminal.echo(`Automatic tick logging is ${(localStorage.showtick == "true")?"enabled":"disabled"}`);
         }
                     
         game.modding.tick = function(t) {
             var e;
-            if (this.game.tick(t), e = Date.now(), checkTicks(this.game), null != this.context.tick && this.context.tick(this.game), e = Date.now() - e, this.max_tick_time = Math.max(this.max_tick_time, e), this.tick_time += e, this.tick_count += 1, this.tick_count >= 600) return ((localStorage.showtick||"true") === "true")?(this.terminal.echo("Tick CPU time: average " + Math.round(this.tick_time / this.tick_count) + " ms ; max " + Math.round(this.max_tick_time) + " ms"), this.terminal.echo("Data sent: " + Math.round(this.I1I0I.log_sent / this.tick_count * 60) + " bytes per second")):void 0, this.tick_count = 0, this.tick_time = 0, this.max_tick_time = 0, this.I1I0I.log_sent = 0
+            if (this.game.tick(t), e = Date.now(), null != parsed.extendedTick && parsed.extendedTick(this.game), null != this.context.tick && this.context.tick(this.game), e = Date.now() - e, this.max_tick_time = Math.max(this.max_tick_time, e), this.tick_time += e, this.tick_count += 1, this.tick_count >= 600) return showtick(null,0),(localStorage.showtick == "true")?(this.terminal.echo("Tick CPU time: average " + Math.round(this.tick_time / this.tick_count) + " ms ; max " + Math.round(this.max_tick_time) + " ms"), this.terminal.echo("Data sent: " + Math.round(this.I1I0I.log_sent / this.tick_count * 60) + " bytes per second")):void 0, this.tick_count = 0, this.tick_time = 0, this.max_tick_time = 0, this.I1I0I.log_sent = 0
         }
         lOlO0.prototype.eventReceived = function(t) {
             var e, i, s, n, r;
             if (null != t.data) {
                 null != t.data.ship && (r = this.modding.game.findShip(t.data.ship), t.data.ship = r), null != t.data.killer && (n = this.modding.game.findShip(t.data.killer), t.data.killer = n), null != t.data.alien && (e = this.modding.game.findAlien(t.data.alien), t.data.alien = e), null != t.data.asteroid && (i = this.modding.game.findAsteroid(t.data.asteroid), t.data.asteroid = i), null != t.data.collectible && (s = this.modding.game.findCollectible(t.data.collectible), t.data.collectible = s);
                 try {
-                    checkEvents(t.data, this.modding.game), null != this.modding.context.event && this.modding.context.event(t.data, this.modding.game)
+                    null != parsed.extendedEvent && parsed.extendedEvent(t.data, this.modding.game), null != this.modding.context.event && this.modding.context.event(t.data, this.modding.game)
                 } catch (t) {
                     t
                 }
@@ -75,4 +76,8 @@ catch(e)
     console.log(e);
     game.modding.terminal.error("An error occured while executing the Modding+ extensions!");
 }
-(success) && game.modding.terminal.echo("Successfully initialized Modding+ extensions into the Modding engine!");
+(success) && game.modding.terminal.echo("Successfully initialized Modding+ extensions into the Modding engine!\nRead the documentation ",
+    {finalize: function($div){
+        $div.children().last().append('<a href="https://github.com/dpleshkov/starblast-modding-plus/blob/master/docs.md" title="Modding+ Documentation" target="_blank">here</a>')
+    }}
+);

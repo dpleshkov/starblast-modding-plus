@@ -16,7 +16,7 @@ const GameExtender = {
         this.modding.terminal.error(item);
     },
     kick: function (identifier) {
-        let ship = this.findShip(identifier);
+        let ship = this.ships[identifier];
         return ship && ship.gameover({
             "Status": "Kicked by operator",
             "Score": ship.score,
@@ -26,14 +26,14 @@ const GameExtender = {
         });
     },
     kill: function (identifier) {
-        let ship = this.findShip(identifier);
+        let ship = this.ships[identifier];
         return ship && ship.set({
             kill: true
         });
     },
     locateShip: function (identifier) {
         if (typeof identifier == "number") {
-            return this.findShip(identifier);
+            return this.ships[identifier];
         }
         let searchQuery = identifier.toLowerCase();
         for (let shipIndex in this.ships) {
@@ -55,35 +55,6 @@ const GameExtender = {
     },
     clearInterval: function (index) {
         this.intervals.splice(index, 1);
-    },
-    checkForTimers: function () {
-        this.timers.forEach(function (timer) {
-            let game = timer[2];
-            if (game.step >= timer[1]) {
-                (typeof timer[0] == "function") && timer[0]();
-                game.timers.delete(timer);
-            }
-        });
-    },
-    checkForIntervals: function () {
-        this.intervals.forEach(function (interval) {
-            if (game.step % interval[1] === 0) {
-                (typeof interval[0] == "function") && interval[0]();
-            }
-        });
-    },
-    updateShips: function (event) {
-        if (!event)
-            this.ships.forEach(function (ship) {
-                ship.highscore = Math.max(ship.highscore || 0, ship.score);
-            });
-        else
-            switch (event.name || "") {
-                case "ship_destroyed":
-                    if (!Object.is(event.killer, null)) event.killer.frag++;
-                    if (!Object.is(event.ship, null)) event.ship.death++;
-                    break;
-            }
     },
     instructorBroadcast: function(message, _instructor, _delay) {
         _instructor = _instructor || "Lucina";
@@ -116,8 +87,7 @@ const ShipExtender = {
     return this;
   },
   frag: 0,
-  death: 0,
-  highscore: 0
+  death: 0
 };
 
 for (let prop of ["invulnerable","angle"])
@@ -154,6 +124,35 @@ Object.assign(game, GameExtender);
 Object.assign(I1l00.prototype, ShipExtender);
 Object.assign(Alien.prototype, AlienExtender);
 
+this.extendedTick = function (game)
+{
+  game.timers.forEach(function (timer) {
+    let game = timer[2];
+    if (game.step >= timer[1]) {
+      (typeof timer[0] == "function") && timer[0]();
+      game.timers.delete(timer);
+    }
+  });
+  game.intervals.forEach(function (interval) {
+    if (game.step % interval[1] === 0) {
+      (typeof interval[0] == "function") && interval[0]();
+    }
+  });
+  game.ships.forEach(function (ship) {
+    ship.highscore = Math.max(ship.highscore || 0, ship.score);
+    ship.rotation = ship.r * 180 / Math.PI;
+  });
+}
+
+this.extendedEvent = function (event, game)
+{
+  switch (event.name) {
+    case "ship_destroyed":
+      if (!Object.is(event.killer, null)) event.killer.frag++;
+      if (!Object.is(event.ship, null)) event.ship.death++;
+      break;
+  }
+}
 /* End of initial setup */
 
 this.options = {
@@ -163,13 +162,11 @@ this.options = {
 };
 
 this.tick = function (game) {
-    game.updateShips();
-    game.checkForTimers();
-    game.checkForIntervals();
+    this.extendedTick(game);
     // do mod stuff here ; see documentation
 };
 
 this.event = function (event, game) {
-    game.updateShips(event);
+    this.extendedEvent(event, game);
     // Place your event handler code here
 }
